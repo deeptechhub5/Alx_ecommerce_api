@@ -1,0 +1,6 @@
+Django>=5.2.7
+djangorestframework>=3.15
+djangorestframework-simplejwt>=5.2.2
+psycopg2-binary>=2.9   # optional for production
+gunicorn>=20.1.0       # optional for Heroku later
+django-filter
