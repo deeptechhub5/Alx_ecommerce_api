@@ -76,6 +76,9 @@ USE_I18N = True
 USE_TZ = True
 STATIC_URL = "/static/"
 
+# Required for production (PythonAnywhere)
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 # Django REST Framework + Simple JWT
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
