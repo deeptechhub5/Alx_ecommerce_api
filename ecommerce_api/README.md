@@ -100,3 +100,21 @@ POST   /api/categories/
 GET    /api/categories/<id>/
 PUT    /api/categories/<id>/
 DELETE /api/categories/<id>/
+
+### Week 3 – Extended Ecommerce Features
+
+In this phase, the API was extended to include core ecommerce user interactions inspired by real-world platforms.
+
+#### Added Features
+- Wishlist system allowing users to save products
+- Cart system with product quantities
+- Secure access using JWT authentication
+- Clean separation of concerns using an `orders` app
+
+#### Key Endpoints
+- `/api/wishlist/`
+- `/api/cart/`
+- `/api/cart/add/`
+- `/api/cart/remove/{product_id}/`
+
+These features bring the API closer to production-ready ecommerce functionality.

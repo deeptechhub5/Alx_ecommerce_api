@@ -14,4 +14,7 @@ urlpatterns = [
 
     # Products & categories
     path('api/', include('products.urls')),
+
+    # Orders
+    path("api/", include("orders.urls")),
 ]
