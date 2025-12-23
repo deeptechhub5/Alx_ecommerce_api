@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from .models import Wishlist, Cart, CartItem
 from .serializers import WishlistSerializer, CartSerializer
 from products.models import Product
-
+from django.shortcuts import get_object_or_404
 
 #WISHLIST 
 
@@ -16,7 +16,7 @@ class WishlistListCreateView(generics.ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         product_id = request.data.get("product_id")
-        product = Product.objects.get(id=product_id)
+        product = get_object_or_404(Product, id=product_id)
         Wishlist.objects.get_or_create(user=request.user, product=product)
         return Response({"message": "Added to wishlist"}, status=201)
 
@@ -47,7 +47,7 @@ class AddToCartView(generics.CreateAPIView):
         product_id = request.data.get("product_id")
         quantity = int(request.data.get("quantity", 1))
         cart, _ = Cart.objects.get_or_create(user=request.user)
-        product = Product.objects.get(id=product_id)
+        product = get_object_or_404(Product, id=product_id)
 
         item, created = CartItem.objects.get_or_create(cart=cart, product=product)
         if not created:

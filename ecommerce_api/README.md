@@ -118,3 +118,110 @@ In this phase, the API was extended to include core ecommerce user interactions 
 - `/api/cart/remove/{product_id}/`
 
 These features bring the API closer to production-ready ecommerce functionality.
+
+Deployment
+
+This project is deployed using PythonAnywhere, a free cloud hosting platform suitable for Django applications. The deployment process involves configuring a virtual environment, installing dependencies, setting environment variables, running database migrations, collecting static files, and configuring the WSGI application.
+
+Live URL
+https://fiifidrillz.pythonanywhere.com/
+
+
+Note: This is an API-only backend. Access specific endpoints such as /admin/ or /api/products/ to interact with the application.
+
+Deployment Platform
+
+Hosting Provider: PythonAnywhere
+
+Python Version: 3.10
+
+Framework: Django + Django REST Framework
+
+Database: SQLite (development/early production)
+
+Deployment Steps
+1. Clone the Repository
+git clone https://github.com/deeptechhub5/Alx_ecommerce_api.git
+cd Alx_ecommerce_api/ecommerce_api
+
+2. Create and Activate Virtual Environment
+python3.10 -m venv venv
+source venv/bin/activate
+
+3. Install Dependencies
+pip install -r requirements.txt
+
+4. Environment Configuration
+
+Update settings.py for production:
+
+Set DEBUG = False
+
+Add PythonAnywhere domain to ALLOWED_HOSTS
+
+Configure STATIC_ROOT
+
+DEBUG = False
+ALLOWED_HOSTS = ["fiifidrillz.pythonanywhere.com"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+5. Apply Database Migrations
+python manage.py makemigrations
+python manage.py migrate
+
+6. Collect Static Files
+python manage.py collectstatic --noinput
+
+7. Configure WSGI on PythonAnywhere
+
+In the Web tab:
+
+Set the source code path:
+
+/home/fiifidrillz/Alx_ecommerce_api/ecommerce_api
+
+
+Set the virtual environment path:
+
+/home/fiifidrillz/Alx_ecommerce_api/ecommerce_api/venv
+
+
+Use Django’s default wsgi.py file:
+
+ecommerce_api/wsgi.py
+
+
+Reload the web app after configuration.
+
+Verifying Deployment
+
+Visit the following URLs to confirm successful deployment:
+
+Django Admin:
+
+https://fiifidrillz.pythonanywhere.com/admin/
+
+
+Products API:
+
+https://fiifidrillz.pythonanywhere.com/api/products/
+
+
+Categories API:
+
+https://fiifidrillz.pythonanywhere.com/api/categories/
+
+Continuous Updates
+
+Changes made locally are pushed to GitHub and pulled into PythonAnywhere:
+
+git pull
+
+
+After pulling updates, reload the web app from the PythonAnywhere dashboard.
+
+Known Limitations
+
+SQLite is used for simplicity; PostgreSQL is recommended for large-scale production.
+
+Image uploads are currently handled via URLs rather than file storage.

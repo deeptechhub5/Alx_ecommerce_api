@@ -1,22 +1,19 @@
 from rest_framework import serializers
 from .models import Wishlist, CartItem, Cart
 from products.serializers import ProductSerializer
-
-
-class WishlistSerializer(serializers.ModelSerializer):
-    product = ProductSerializer(read_only=True)
-
-    class Meta:
-        model = Wishlist
-        fields = ["id", "product", "added_at"]
-
+from products.models import Product
 
 class CartItemSerializer(serializers.ModelSerializer):
     product = ProductSerializer(read_only=True)
+    product_id = serializers.PrimaryKeyRelatedField(
+        queryset=Product.objects.all(),
+        source="product",
+        write_only=True
+    )
 
     class Meta:
         model = CartItem
-        fields = ["id", "product", "quantity"]
+        fields = ["id", "product", "product_id", "quantity"]
 
 
 class CartSerializer(serializers.ModelSerializer):
@@ -25,3 +22,10 @@ class CartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
         fields = ["id", "items", "created_at"]
+
+class WishlistSerializer(serializers.ModelSerializer):
+    product = ProductSerializer(read_only=True)
+
+    class Meta:
+        model = Wishlist
+        fields = ["id", "product", "added_at"]
